@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D770 MTSS Literacy Intervention Toolbox</title>
+<meta name="description" content="Interactive MTSS literacy intervention toolbox for adolescent readers.">
+<style>
+:root{
+  --navy:#172033; --ink:#202938; --muted:#617083; --bg:#f4f7fb; --card:#ffffff;
+  --line:#dce3ec; --t1:#2563eb; --t2:#7c3aed; --t3:#b45309; --green:#0f766e;
+  --soft1:#eff6ff; --soft2:#f5f3ff; --soft3:#fff7ed; --shadow:0 12px 30px rgba(23,32,51,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+a{color:#0b57d0}
+.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+.hero{background:linear-gradient(145deg,#111827,#24324a);color:white;padding:54px 0 44px}
+.kicker{text-transform:uppercase;letter-spacing:.13em;font-size:.78rem;font-weight:700;color:#b9c5d6}
+h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.02;margin:.45rem 0 1rem}
+.hero p{max-width:850px;color:#d7dee9;font-size:1.08rem}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--navy);color:white;text-decoration:none;display:inline-block}
+.btn.light{background:white;color:var(--navy)}
+.btn.ghost{background:#e8edf4;color:var(--navy)}
+nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+nav .wrap{display:flex;gap:8px;flex-wrap:wrap;padding:10px 0}
+nav a{text-decoration:none;color:var(--ink);font-weight:700;padding:7px 10px;border-radius:999px}
+nav a:hover{background:#eef2f7}
+main{padding:34px 0 60px}
+section{margin:0 0 38px}
+h2{font-size:1.8rem;margin:.2rem 0 12px}
+h3{margin:.2rem 0 8px}
+.subtle{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tier{border-top:6px solid}
+.t1{border-top-color:var(--t1)} .t2{border-top-color:var(--t2)} .t3{border-top-color:var(--t3)}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:.78rem;font-weight:700;margin-bottom:10px}
+.t1 .badge{background:var(--soft1);color:var(--t1)}
+.t2 .badge{background:var(--soft2);color:var(--t2)}
+.t3 .badge{background:var(--soft3);color:var(--t3)}
+.iconbox{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:12px}
+.t1 .iconbox{background:var(--soft1)} .t2 .iconbox{background:var(--soft2)} .t3 .iconbox{background:var(--soft3)}
+.iconbox svg{width:34px;height:34px}
+.details{display:none;border-top:1px solid var(--line);margin-top:15px;padding-top:15px}
+.details.open{display:block}
+.steps{padding-left:1.25rem}.steps li{margin:.35rem 0}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+.flow .node{background:white;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;font-weight:700;box-shadow:var(--shadow)}
+.flow .arrow{display:none}
+.decision{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.choice-list{display:grid;gap:9px}
+.choice{border:1px solid var(--line);background:white;padding:12px 14px;border-radius:11px;text-align:left;font-weight:700;cursor:pointer}
+.choice:hover,.choice.active{border-color:#111827;background:#f8fafc}
+.result{background:#111827;color:white;border-radius:18px;padding:22px;min-height:260px;box-shadow:var(--shadow)}
+.result .subtle{color:#cad4e3}
+.matrix{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.matrix th,.matrix td{padding:13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.matrix th{background:#eaf0f6}
+.callout{background:#ecfeff;border-left:5px solid var(--green);padding:16px 18px;border-radius:10px}
+.resource{margin-bottom:12px}
+.small{font-size:.92rem}
+.footer{background:#111827;color:#cfd8e5;padding:28px 0}
+.footer strong{color:white}
+.print-note{font-size:.9rem;color:#677489}
+@media(max-width:850px){
+  .grid3,.decision,.flow{grid-template-columns:1fr}
+  nav{position:static}
+}
+@media print{
+  nav,.hero-actions,.choice-list,.btn{display:none!important}
+  body{background:white}
+  .card,.matrix,.result{box-shadow:none}
+  .details{display:block}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Secondary Literacy Methods and Interventions · D770</div>
+    <h1>MTSS Literacy Intervention Toolbox</h1>
+    <p>
+      A practical digital resource for matching adolescent literacy needs with increasingly intensive supports.
+      The toolbox connects literacy instruction to meaningful real-world content while keeping intervention decisions grounded in student performance data.
+    </p>
+    <div class="hero-actions">
+      <a class="btn light" href="#tiers">Explore the Toolbox</a>
+      <button class="btn ghost" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#tiers">Tiers</a>
+    <a href="#flow">MTSS Flow</a>
+    <a href="#decision">Student-Need Guide</a>
+    <a href="#matrix">At-a-Glance</a>
+    <a href="#resources">Research</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section>
+  <h2>How to Use This Toolbox</h2>
+  <div class="callout">
+    <strong>Start with the learner need, not the label.</strong>
+    Use grade-level core instruction first, add targeted support when students need more structure or practice, and intensify intervention when progress data shows the current support is not enough.
+  </div>
+</section>
+
+<section id="tiers">
+  <h2>Instructional Strategies Across the Three MTSS Tiers</h2>
+  <p class="subtle">Each tier below includes one practical strategy, how it supports secondary literacy, and how it can connect reading to real-world content.</p>
+
+  <div class="grid3">
+    <article class="card tier t1">
+      <div class="iconbox" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#2563eb" stroke-width="3">
+          <path d="M8 10h32v28H8z"/><path d="M14 17h20M14 24h14M14 31h17"/>
+        </svg>
+      </div>
+      <span class="badge">Tier I · Universal</span>
+      <h3>Explicit Vocabulary Instruction + Real-World Connections</h3>
+      <p>High-quality core instruction for all students.</p>
+      <p><strong>Targets:</strong> academic vocabulary, background knowledge, and access to content-area text.</p>
+      <button class="btn" onclick="toggleDetails('tier1',this)">Open Tier I Toolkit</button>
+
+      <div id="tier1" class="details">
+        <h3>Why this strategy fits Tier I</h3>
+        <p>
+          Adolescent readers encounter specialized academic language in science, mathematics, social studies, and technical subjects.
+          Explicit vocabulary instruction gives all students a stronger entry point into complex text.
+        </p>
+        <h3>Teacher routine</h3>
+        <ol class="steps">
+          <li>Select a small number of high-value words that are necessary for understanding the text.</li>
+          <li>Pronounce each word and provide a student-friendly definition.</li>
+          <li>Analyze useful roots, prefixes, or suffixes when appropriate.</li>
+          <li>Show the word in the sentence or passage where students will encounter it.</li>
+          <li>Connect the word to a visual, demonstration, physical model, or real-world situation.</li>
+          <li>Require students to use the word in speaking and writing.</li>
+          <li>Revisit the word across the lesson or unit.</li>
+        </ol>
+        <h3>Real-world example</h3>
+        <p>
+          During a science lesson on forces, students examine foam inside a bicycle helmet while learning the word
+          <strong>compression</strong>. The word is connected to something students can see, touch, and explain before they encounter it in technical text.
+        </p>
+        <h3>How it supports secondary literacy</h3>
+        <p>
+          Students build the background and word knowledge needed to understand grade-level text. The strategy also gives students multiple representations of meaning instead of relying on memorized definitions alone.
+        </p>
+        <h3>Progress evidence</h3>
+        <p>Short vocabulary checks, oral use of terms, exit tickets, and comprehension questions tied directly to the text.</p>
+      </div>
+    </article>
+
+    <article class="card tier t2">
+      <div class="iconbox" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#7c3aed" stroke-width="3">
+          <circle cx="16" cy="18" r="6"/><circle cx="32" cy="18" r="6"/><path d="M7 38c1-7 5-11 9-11s8 4 9 11M23 38c1-7 5-11 9-11s8 4 9 11"/>
+        </svg>
+      </div>
+      <span class="badge">Tier II · Targeted</span>
+      <h3>Collaborative Strategic Reading (CSR)</h3>
+      <p>Supplemental small-group support for students who need more than Tier I alone.</p>
+      <p><strong>Targets:</strong> vocabulary breakdowns and reading comprehension.</p>
+      <button class="btn" onclick="toggleDetails('tier2',this)">Open Tier II Toolkit</button>
+
+      <div id="tier2" class="details">
+        <h3>CSR sequence</h3>
+        <ol class="steps">
+          <li><strong>Preview:</strong> activate background knowledge and establish a purpose for reading.</li>
+          <li><strong>Click and Clunk:</strong> recognize words or ideas that interrupt comprehension and resolve them systematically.</li>
+          <li><strong>Get the Gist:</strong> identify what the section is mostly about and the most important idea.</li>
+          <li><strong>Wrap Up:</strong> ask questions, review key ideas, and return to the original purpose for reading.</li>
+        </ol>
+        <h3>Explicit, systematic instruction</h3>
+        <p>
+          The teacher first models the routine through think-alouds, then moves to guided practice, supported student practice, and increasingly independent use.
+        </p>
+        <h3>Real-world example</h3>
+        <p>
+          Students begin with the question, <em>Why can a bicycle helmet reduce injury even though it cannot prevent a crash?</em>
+          They use CSR to solve unfamiliar academic vocabulary and determine the central idea from a short science passage.
+        </p>
+        <h3>How it supports secondary literacy</h3>
+        <p>
+          CSR gives struggling readers a repeatable process for recognizing when understanding breaks down and for extracting meaning from informational text across content areas.
+        </p>
+        <h3>Progress evidence</h3>
+        <p>Vocabulary accuracy, gist statements, comprehension probes, and repeated performance across comparable texts.</p>
+      </div>
+    </article>
+
+    <article class="card tier t3">
+      <div class="iconbox" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#b45309" stroke-width="3">
+          <path d="M9 36h30M12 29h24M16 22h16M20 15h8"/>
+        </svg>
+      </div>
+      <span class="badge">Tier III · Intensive</span>
+      <h3>Multisyllabic Word Reading + Data-Based Individualization</h3>
+      <p>Intensive, individualized support for persistent literacy needs.</p>
+      <p><strong>Targets:</strong> complex word reading, decoding, and access to academic text.</p>
+      <button class="btn" onclick="toggleDetails('tier3',this)">Open Tier III Toolkit</button>
+
+      <div id="tier3" class="details">
+        <h3>Teacher routine</h3>
+        <ol class="steps">
+          <li>Use diagnostic information to identify the student's specific word-reading barrier.</li>
+          <li>Teach recognition of prefixes and suffixes.</li>
+          <li>Identify the base word or root when possible.</li>
+          <li>Divide long words into manageable syllables or meaningful parts.</li>
+          <li>Read each part and blend the complete word.</li>
+          <li>Determine meaning within the sentence.</li>
+          <li>Apply the word in connected text.</li>
+        </ol>
+        <h3>Data-based individualization</h3>
+        <p>
+          If progress is inadequate, the teacher adjusts the intervention using diagnostic and progress-monitoring data rather than simply repeating the same lesson. Intensity can increase through smaller groups, additional instructional time, more modeling, more opportunities to respond, and more immediate corrective feedback.
+        </p>
+        <h3>Real-world example</h3>
+        <p>
+          A student breaks down <strong>photosynthesis</strong>, reads the word accurately, connects meaningful word parts to the concept, and then applies the word while reading about how plants convert light energy into stored chemical energy.
+        </p>
+        <h3>How it supports secondary literacy</h3>
+        <p>
+          Efficient word reading frees cognitive resources for comprehension and gives students better access to the complex vocabulary found throughout secondary content areas.
+        </p>
+        <h3>Progress evidence</h3>
+        <p>Frequent word-reading probes, error-pattern analysis, connected-text performance, and response to instructional adaptations.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="flow">
+  <h2>MTSS Decision Flow</h2>
+  <p class="subtle">Intervention intensity should respond to student performance.</p>
+  <div class="flow">
+    <div class="node">1. Strong Tier I Core</div>
+    <div class="node">2. Monitor Learning</div>
+    <div class="node">3. Add Tier II Support</div>
+    <div class="node">4. Review Progress Data</div>
+    <div class="node">5. Intensify / Individualize if Needed</div>
+  </div>
+</section>
+
+<section id="decision">
+  <h2>What Does My Student Need?</h2>
+  <p class="subtle">Use this as a starting point for instructional planning, then confirm the decision with student performance data.</p>
+
+  <div class="decision">
+    <div class="card">
+      <div class="choice-list">
+        <button class="choice" data-key="vocab">Struggles with academic vocabulary</button>
+        <button class="choice" data-key="comp">Reads the words but does not understand the text</button>
+        <button class="choice" data-key="gist">Cannot identify the central idea or supporting details</button>
+        <button class="choice" data-key="multi">Struggles to read unfamiliar multisyllabic words</button>
+        <button class="choice" data-key="oral">Understands concepts orally but struggles when reading independently</button>
+        <button class="choice" data-key="nonresponse">Is not responding adequately to the current intervention</button>
+      </div>
+    </div>
+
+    <div id="result" class="result" aria-live="polite">
+      <div class="kicker">Decision Support</div>
+      <h2>Select a student need</h2>
+      <p class="subtle">
+        The recommended starting point will appear here. Progress monitoring should determine whether the support is working and whether intervention intensity needs to change.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="matrix">
+  <h2>Toolbox at a Glance</h2>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th>Tier</th><th>Strategy</th><th>Primary Literacy Need</th><th>Level of Support</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tier I</strong></td>
+        <td>Explicit vocabulary instruction with real-world connections</td>
+        <td>Vocabulary, background knowledge, comprehension access</td>
+        <td>Universal core instruction</td>
+      </tr>
+      <tr>
+        <td><strong>Tier II</strong></td>
+        <td>Collaborative Strategic Reading</td>
+        <td>Vocabulary and reading comprehension</td>
+        <td>Targeted supplemental small-group instruction</td>
+      </tr>
+      <tr>
+        <td><strong>Tier III</strong></td>
+        <td>Multisyllabic word reading with data-based individualization</td>
+        <td>Foundational decoding and access to complex academic text</td>
+        <td>Intensive individualized intervention</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <div class="callout">
+    <strong>Real-world relevance is the context, not the intervention.</strong>
+    Connecting literacy instruction to science, engineering, technology, current events, and student interests can increase the reason to read and understand. Progress-monitoring data still determines whether the intervention itself is effective.
+  </div>
+</section>
+
+<section id="resources">
+  <h2>Research and Implementation Resources</h2>
+
+  <div class="card resource">
+    <h3>Improving Adolescent Literacy: Effective Classroom and Intervention Practices</h3>
+    <p class="small">What Works Clearinghouse, Institute of Education Sciences. Supports explicit vocabulary instruction, direct comprehension instruction, student engagement, and intensive individualized intervention.</p>
+    <a href="https://ies.ed.gov/ncee/wwc/PracticeGuide/8/WhatWeDo" target="_blank" rel="noopener">Open resource</a>
+  </div>
+
+  <div class="card resource">
+    <h3>Providing Reading Interventions for Students in Grades 4–9</h3>
+    <p class="small">What Works Clearinghouse, Institute of Education Sciences. Supports complex multisyllabic word reading, fluency, and comprehension-building practices.</p>
+    <a href="https://ies.ed.gov/ncee/wwc/PracticeGuide/29" target="_blank" rel="noopener">Open resource</a>
+  </div>
+
+  <div class="card resource">
+    <h3>Using Collaborative Strategic Reading</h3>
+    <p class="small">Reading Rockets. Describes Preview, Click and Clunk, Get the Gist, and Wrap Up.</p>
+    <a href="https://www.readingrockets.org/topics/comprehension/articles/using-collaborative-strategic-reading" target="_blank" rel="noopener">Open resource</a>
+  </div>
+
+  <div class="card resource">
+    <h3>Data-Based Individualization: A Framework for Intensive Intervention</h3>
+    <p class="small">National Center on Intensive Intervention. Describes the use of assessment data, validated interventions, and research-based adaptation strategies to intensify support.</p>
+    <a href="https://intensiveintervention.org/resource/data-based-individualization-framework-intensive-intervention" target="_blank" rel="noopener">Open resource</a>
+  </div>
+
+  <p class="print-note">This page is self-contained. It does not collect, transmit, or store student information.</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <strong>D770 MTSS Literacy Intervention Toolbox</strong><br>
+    Secondary Literacy Methods and Interventions<br>
+    Practical teacher resource for adolescent literacy support across MTSS.
+  </div>
+</footer>
+
+<script>
+function toggleDetails(id,btn){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  btn.textContent=el.classList.contains('open')?'Close Toolkit':('Open '+id.replace('tier','Tier ')+' Toolkit');
+}
+const recs={
+  vocab:{tier:'Tier I starting point',title:'Explicit Vocabulary Instruction',body:'Preteach a small set of high-value academic terms using student-friendly definitions, word parts, context, visuals, and real-world examples. Require students to use the terms in speaking and writing.',monitor:'Monitor with short vocabulary checks, oral use, and comprehension questions tied to the text.'},
+  comp:{tier:'Tier II starting point',title:'Collaborative Strategic Reading',body:'Use CSR in a targeted small group. Model Click and Clunk and Get the Gist so the student has an explicit routine for recognizing breakdowns and extracting meaning.',monitor:'Monitor gist statements, comprehension probes, and accuracy across comparable passages.'},
+  gist:{tier:'Tier II starting point',title:'CSR: Get the Gist',body:'Teach the student to ask: Who or what is this section mostly about? What is the most important thing the author wants me to understand? Then require a concise statement in the student’s own words.',monitor:'Monitor accuracy identifying central ideas and supporting details across repeated probes.'},
+  multi:{tier:'Tier III starting point',title:'Explicit Multisyllabic Word Reading',body:'Use diagnostic data to teach a systematic routine for prefixes, suffixes, roots, syllables, blending, and connected-text application.',monitor:'Monitor word-reading accuracy, error patterns, and performance in connected text.'},
+  oral:{tier:'Tier II or Tier III depending on decoding data',title:'Separate Language Knowledge from Word Reading',body:'If the student can explain the concept orally but cannot access it independently in print, compare decoding and comprehension performance. Use targeted comprehension support if decoding is adequate; use intensive word-reading intervention if it is not.',monitor:'Monitor oral comprehension, independent reading comprehension, and word-level accuracy separately.'},
+  nonresponse:{tier:'Increase intervention intensity',title:'Use Data-Based Individualization',body:'Do not simply repeat the same intervention. Review error patterns and response data, then adjust instructional time, group size, opportunities to respond, modeling, feedback, or the skill focus.',monitor:'Monitor frequently after each adaptation and use the response data to guide the next decision.'}
+};
+document.querySelectorAll('.choice').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.choice').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const r=recs[b.dataset.key];
+    document.getElementById('result').innerHTML=
+      `<div class="kicker">${r.tier}</div><h2>${r.title}</h2><p>${r.body}</p><p class="subtle"><strong>Progress monitoring:</strong> ${r.monitor}</p>`;
+  });
+});
+</script>
+</body>
+</html>
